@@ -4,8 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GeometryCollection/GeometryCollectionActor.h"
+#include "Field/FieldSystemActor.h"
 #include "DestructiblePlatform.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMyEventDelegate);
 /**
  *
  */
@@ -33,4 +35,10 @@ public:
 		float ChaosDestroyTimer = 2.0f;
 
 	FTimerHandle MyTimerHandle;
+
+	UPROPERTY(BlueprintAssignable, Category = "MyCategory")
+		FMyEventDelegate OnMyEvent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Custom | Chaos Destruction")
+		TSubclassOf<AActor> FieldActor;
 };
