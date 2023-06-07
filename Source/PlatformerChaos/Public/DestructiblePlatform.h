@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/StaticMeshActor.h"
+#include "GeometryCollection/GeometryCollectionActor.h"
 #include "DestructiblePlatform.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PLATFORMERCHAOS_API ADestructiblePlatform : public AStaticMeshActor
+class PLATFORMERCHAOS_API ADestructiblePlatform : public AGeometryCollectionActor
 {
 	GENERATED_BODY()
 	
