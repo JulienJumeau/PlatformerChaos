@@ -8,6 +8,7 @@
 void ADestructiblePlatform::BeginPlay()
 {
 	Super::BeginPlay();
+	MustShake = true;
 	GeometryCollectionComponent->OnComponentHit.AddDynamic(this, &ADestructiblePlatform::OnComponentHit);
 }
 
@@ -29,12 +30,15 @@ void ADestructiblePlatform::OnComponentHit(UPrimitiveComponent* HitComponent, AA
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("Hit From above")));
 		GetWorldTimerManager().SetTimer(MyTimerHandle, this, &ADestructiblePlatform::ChaosDestroy, ChaosDestroyTimer, false);
 		GeometryCollectionComponent->OnComponentHit.RemoveDynamic(this, &ADestructiblePlatform::OnComponentHit);
+		ShakePlatform();
 	}
 }
 
 void ADestructiblePlatform::ChaosDestroy()
 {
-	OnMyEvent.Broadcast();
+	MustShake = false;
+	OnDestructionTimerEnd.Broadcast();
+
 	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("Destroyed")));
 
 	//if (GeometryCollectionComponent)haos 
@@ -56,4 +60,21 @@ void ADestructiblePlatform::ChaosDestroy()
 	//if (ChaosSolverActor)
 	//{
 	//}
+}
+
+void ADestructiblePlatform::ShakePlatform()
+{
+	// Generate random offsets for shaking
+	FVector ShakeOffset = FVector(FMath::RandRange(-ShakeIntensity, ShakeIntensity),
+		FMath::RandRange(-ShakeIntensity, ShakeIntensity),
+		0.0f);
+
+	// Apply the offset to the platform's position
+	AddActorLocalOffset(ShakeOffset);
+
+	// Call the function again after a short delay to create the shaking effect
+	if (MustShake)
+	{
+		GetWorldTimerManager().SetTimer(ShakeTimerHandle, this, &ADestructiblePlatform::ShakePlatform, ShakeRate, false);
+	}
 }

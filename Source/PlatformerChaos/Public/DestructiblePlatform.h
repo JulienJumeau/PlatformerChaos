@@ -30,15 +30,26 @@ private:
 	UFUNCTION()
 		void ChaosDestroy();
 
+	UFUNCTION()
+		void ShakePlatform();
+
+	FTimerHandle MyTimerHandle;
+	FTimerHandle ShakeTimerHandle;
+	bool MustShake;
+
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom | Chaos Destruction")
 		float ChaosDestroyTimer = 2.0f;
 
-	FTimerHandle MyTimerHandle;
-
-	UPROPERTY(BlueprintAssignable, Category = "MyCategory")
-		FMyEventDelegate OnMyEvent;
+	UPROPERTY(BlueprintAssignable, Category = "Custom | Chaos Destruction")
+		FMyEventDelegate OnDestructionTimerEnd;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Custom | Chaos Destruction")
 		TSubclassOf<AActor> FieldActor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom | Shaking")
+		float ShakeIntensity = 2.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom | Shaking")
+		float ShakeRate = 0.3f;
 };
