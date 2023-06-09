@@ -38,28 +38,6 @@ void ADestructiblePlatform::ChaosDestroy()
 {
 	MustShake = false;
 	OnDestructionTimerEnd.Broadcast();
-
-	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("Destroyed")));
-
-	//if (GeometryCollectionComponent)haos 
-	//{
-	//	GeometryCollectionComponent->InitializationFields.Empty();
-	//	//GeometryCollectionComponent->ObjectType = EObjectStateTypeEnum::Chaos_Object_Dynamic;
-	//	GeometryCollectionComponent->SetDynamicState(Chaos::EObjectStateType::Dynamic);
-	//	//GeometryCollectionComponent->
-	//}
-
-	//// Assuming you have a reference to the ChaosSolverActor associated with the GeometryCollectionComponent
-	//AChaosSolverActor* ChaosSolverActor = GeometryCollectionComponent->ChaosSolverActor;
-	//
-	////FVector SpawnLocation = FVector(0.0f, 0.0f, 0.0f); // Set the desired spawn location
-	////FRotator SpawnRotation = FRotator(0.0f, 0.0f, 0.0f); // Set the desired spawn rotation
-	////FTransform SpawnTransform(SpawnRotation, this->GetActorLocation());
-	//AActor* SpawnedFieldActor = GetWorld()->SpawnActor<AActor>(FieldActor, this->GetActorTransform());
-
-	//if (ChaosSolverActor)
-	//{
-	//}
 }
 
 void ADestructiblePlatform::ShakePlatform()
