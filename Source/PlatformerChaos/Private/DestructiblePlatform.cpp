@@ -27,7 +27,6 @@ void ADestructiblePlatform::OnComponentHit(UPrimitiveComponent* HitComponent, AA
 
 	if (DotProduct < -0.5f)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("Hit From above")));
 		GetWorldTimerManager().SetTimer(MyTimerHandle, this, &ADestructiblePlatform::ChaosDestroy, ChaosDestroyTimer, false);
 		GeometryCollectionComponent->OnComponentHit.RemoveDynamic(this, &ADestructiblePlatform::OnComponentHit);
 		ShakePlatform();
